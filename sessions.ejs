@@ -1,0 +1,30 @@
+<!-- views/session.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= session.name %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1><%= session.name %></h1>
+        <p>Date: <%= session.date.toDateString() %></p>
+        <h2>Attendees</h2>
+        <ul>
+            <% session.attendees.forEach(attendee => { %>
+                <li><%= attendee %></li>
+            <% }) %>
+        </ul>
+        <form action="/sessions/<%= session._id %>/attend" method="POST">
+            <div class="form-group">
+                <label for="attendee">Add Attendee:</label>
+                <input type="text" id="attendee" name="attendee" required>
+            </div>
+            <button type="submit">Add</button>
+        </form>
+        <a href="/sessions">Back to Sessions</a>
+    </div>
+</body>
+</html>
